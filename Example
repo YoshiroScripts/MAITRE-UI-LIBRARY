@@ -1,0 +1,35 @@
+local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/YoshiroScripts/MAITRE-UI-LIBRARY/refs/heads/main/SIMILAR-TO-ELERIUM.py"))()
+local win = lib:AddWindow("Example", {main_color = Color3.fromRGB(0, 128, 255), min_size = Vector2.new(640,600)})
+
+local mainTab = win:AddTab("Main")
+
+mainTab:AddLabel("Discord Server:")
+
+mainTab:AddButton("Copy Link", function()
+    setclipboard("https://discord.com/invite/abZJTzgV")
+end)
+
+mainTab:AddLabel("Local Player")
+
+local walkSpeedValue = 16
+mainTab:AddTextBox("WalkSpeed", function(text)
+    local speed = tonumber(text)
+    if speed and speed >= 1 and speed <= 500 then
+        walkSpeedValue = speed
+    end
+end)
+
+local setSpeed = false
+Main:AddSwitch("Set Speed", function(state)
+    setSpeed = state
+    while setSpeed do
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = walkSpeedValue
+        task.wait(0.1)
+    end
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+end)
+
+mainTab:AddSwitch("Example", function(state)
+    print("Switch is now", state)
+end)
+switch:Set(true) -- Programmatically set state
